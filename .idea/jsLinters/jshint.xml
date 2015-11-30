@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="JSHintConfiguration" version="2.7.0" use-config-file="false">
+  <component name="JSHintConfiguration" version="2.7.0" use-config-file="true">
     <option asi="false" />
     <option bitwise="true" />
     <option boss="false" />
@@ -37,7 +37,7 @@
     <option laxcomma="false" />
     <option loopfunc="false" />
     <option maxerr="50" />
-    <option mocha="false" />
+    <option mocha="true" />
     <option mootools="false" />
     <option moz="false" />
     <option multistr="false" />

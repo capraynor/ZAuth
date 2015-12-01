@@ -9,7 +9,7 @@ describe('User', function () {
 
             var db = require('../lib/database').connection;
             var User = require('../lib/models/Users')(db);
-            User.remove({uInfo:'_____TESTDATA_____'}, function (err) {
+            User.remove({uInfo:'_____TESTDATA_USER_____'}, function (err) {
                 done(err);
             })
         })
@@ -18,7 +18,7 @@ describe('User', function () {
 
             var db = require('../lib/database').connection;
             var User = require('../lib/models/Users')(db);
-            User.remove({uInfo:'_____TESTDATA_____'}, function (err) {
+            User.remove({uInfo:'_____TESTDATA_USER_____'}, function (err) {
                 done(err);
             })
         })
@@ -30,8 +30,8 @@ describe('User', function () {
             var user = new User({
                 uName:'张三',
                 uPwd:'abc',
-                uInfo:'_____TESTDATA_____',
-                uEmail:'test@test.com'
+                uInfo:'_____TESTDATA_USER_____',
+                uEmail:'UsersTest@test.com'
             });
 
             user.save(function (err, user) {
@@ -52,19 +52,20 @@ describe('User', function () {
             var user = new User({
                 uName:'张三',
                 uPwd:'abc',
-                uInfo:'_____TESTDATA_____',
-                uEmail:'test@test.com'
+                uInfo:'_____TESTDATA_USER_____',
+                uEmail:'UsersTest@test.com'
             });
 
             user.save(function (err, user) {
                 if (!err){
-                    done (new Error('success while email is duplicate'));
+                    return done (new Error('success while user\'s email is duplicate'));
                 }
-
-                done();
+                return done();
 
             });
-        })
+        });
+
     })
+
 });
 

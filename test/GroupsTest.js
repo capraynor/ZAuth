@@ -103,12 +103,17 @@ describe('Group', function () {
                     gInfo: '_____TESTDATA_GROUP_ADD_USER_____',
                     gLevel: 1
                 });
-
-                group.addUser(uId, function (err) {
+                var _user = user;
+                group.addUser(uId, function (err, group) {
                     if (!!err) {
                         return done(err);
                     }
-                    done();
+                    group.users.should.to.contain(uId);
+                    User.findOne({_id:uId}, function (err, user) {
+                        user.parent.should.to.contain(group._id);
+                        done(err);
+                    });
+
                 });
 
             });
@@ -266,7 +271,7 @@ describe('Group', function () {
             var db = require('../lib/database').connection;
             var Group = require('../lib/models/Groups')(db);
 
-            var parentGroup = Group.findOne({_id: parentGroupId}, function (err, parentGroup) {
+            Group.findOne({_id: parentGroupId}, function (err, parentGroup) {
 
                 parentGroup.addGroup(childGroupId, function (err, parentGroup) {
                     if (err) {
@@ -279,8 +284,17 @@ describe('Group', function () {
             })
         });
 
-        it('should not be added while group level is wrong', function () {
+        it('should not success while group level is wrong', function (done) {
+            var db = require('../lib/database').connection;
+            var Group = require('../lib/models/Groups')(db);
 
+            Group.findOne({_id: childGroupId}, function (err, parentGroup) {
+
+                parentGroup.addGroup(parentGroupId, function (err, childGroup) {
+                    childGroup.groups.should.not.to.contain(parentGroupId);
+                    return done();
+                });
+            });
         });
 
     })

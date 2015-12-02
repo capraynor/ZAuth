@@ -40,7 +40,7 @@ describe('User', function () {
                 }
                 user.should.be.an.instanceOf(User);
                 user.should.have.property('uId');
-                user.should.not.have.property('uid');
+                user.should.not.have.property('uid'); // mew~~~ ^_^
                 done();
             });
         });

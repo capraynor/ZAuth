@@ -61,7 +61,6 @@ describe('User', function () {
                     return done (new Error('success while user\'s email is duplicate'));
                 }
                 return done();
-
             });
         });
 

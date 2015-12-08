@@ -278,7 +278,12 @@ describe('Group', function () {
                         return done(err);
                     }
                     parentGroup.groups.should.to.contain(childGroupId);
-                    done();
+                    Group.findOne({_id:childGroupId}, function (err, childGroup) {
+                        console.log(childGroup);
+                        childGroup.parent.should.to.eql(parentGroupId);
+                        done();
+                    })
+
 
                 })
             })
@@ -298,6 +303,7 @@ describe('Group', function () {
         });
 
     })
+
 
 
 })
